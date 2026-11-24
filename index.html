@@ -15,17 +15,13 @@
        ======================================================================== */
     :root {
       --bg-color: #130b1c;
-      --bg-glow-1: rgba(255, 105, 180, 0.24);
-      --bg-glow-2: rgba(168, 85, 247, 0.22);
-      --hud-panel: rgba(27, 16, 40, 0.76);
-      --hud-panel-solid: rgba(34, 20, 50, 0.94);
+      --hud-panel: rgba(27, 16, 40, 0.78);
       --hud-border: rgba(255, 158, 214, 0.28);
       --hud-border-strong: rgba(255, 120, 200, 0.65);
       --hud-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.14);
       --text-primary: #fdf4ff;
       --text-secondary: #c4a7d4;
       --accent: #ff69b4;
-      --accent-alt: #c084fc;
       --accent-soft: rgba(255, 105, 180, 0.16);
       --success: #4ade80;
       --danger: #fb7185;
@@ -41,17 +37,13 @@
 
     [data-mode="facility"] {
       --bg-color: #060b0e;
-      --bg-glow-1: rgba(0, 245, 212, 0.16);
-      --bg-glow-2: rgba(239, 68, 68, 0.14);
-      --hud-panel: rgba(10, 19, 24, 0.82);
-      --hud-panel-solid: rgba(12, 24, 30, 0.96);
+      --hud-panel: rgba(10, 19, 24, 0.84);
       --hud-border: rgba(0, 245, 212, 0.28);
       --hud-border-strong: rgba(0, 245, 212, 0.72);
       --hud-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(0, 245, 212, 0.16);
       --text-primary: #ecfdf5;
       --text-secondary: #7ea39b;
       --accent: #00f5d4;
-      --accent-alt: #38bdf8;
       --accent-soft: rgba(0, 245, 212, 0.13);
       --success: #22c55e;
       --danger: #ef4444;
@@ -91,7 +83,6 @@
       transform: scale(0.96);
     }
 
-    /* Fullscreen FX Layers */
     #hud-canvas {
       position: fixed;
       inset: 0;
@@ -108,7 +99,6 @@
       z-index: 900;
       opacity: 0;
       background: radial-gradient(circle, transparent 45%, rgba(239, 68, 68, 0.55) 100%);
-      transition: opacity 0.15s ease;
     }
 
     .alert-flash.active {
@@ -298,7 +288,7 @@
     }
 
     /* ========================================================================
-       4. BENTO GRID DASHBOARD (4 INTERACTIVE PANELS + REWARD STRIP)
+       4. BENTO GRID DASHBOARD
        ======================================================================== */
     .bento-dashboard {
       display: grid;
@@ -388,13 +378,8 @@
       filter: brightness(1.08);
     }
 
-    .hud-btn:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
     /* ========================================================================
-       5. PANEL 1: FTF COMPUTER HACK (3 CONSECUTIVE SKILL CHECKS)
+       5. PANEL 1: FTF COMPUTER HACK
        ======================================================================== */
     .ftf-monitor {
       background: #040b0d;
@@ -497,7 +482,7 @@
     }
 
     /* ========================================================================
-       6. PANEL 2: FOUNTAIN OF DREAMS (RIGGED EDITION + 4 CHOICES)
+       6. PANEL 2: FOUNTAIN OF DREAMS
        ======================================================================== */
     .fountain-box {
       background: rgba(0, 0, 0, 0.28);
@@ -558,7 +543,7 @@
     }
 
     /* ========================================================================
-       7. PANEL 3: SUNSET ISLAND VOTING (3 ROSES)
+       7. PANEL 3: SUNSET ISLAND VOTING
        ======================================================================== */
     .roses-bar {
       display: flex;
@@ -607,7 +592,7 @@
     }
 
     /* ========================================================================
-       8. PANEL 4: FREEZE POD RESCUE CLICKER (8s)
+       8. PANEL 4: FREEZE POD RESCUE CLICKER
        ======================================================================== */
     .pod-box {
       background: rgba(0, 0, 0, 0.32);
@@ -672,6 +657,62 @@
       position: relative;
       z-index: 2;
     }
+
+    /* ========================================================================
+       9. PANEL 5: LOVE LETTER ENVELOPE CARD
+       ======================================================================== */
+    .letter-stage {
+      background: rgba(0, 0, 0, 0.28);
+      border: 1px dashed var(--hud-border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      text-align: center;
+      transition: all 0.35s ease;
+    }
+
+    .letter-stage.opened {
+      border-style: solid;
+      border-color: var(--accent);
+      background: rgba(255, 105, 180, 0.08);
+      text-align: left;
+    }
+
+    [data-mode="facility"] .letter-stage.opened {
+      background: rgba(0, 245, 212, 0.07);
+    }
+
+    .letter-body-text {
+      display: none;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text-primary);
+      animation: popScale 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .letter-stage.opened .letter-body-text {
+      display: block;
+    }
+
+    .letter-stage.opened .letter-locked-prompt {
+      display: none;
+    }
+
+    .letter-locked-prompt {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .letter-actions-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .letter-actions-row .hud-btn {
+      flex: 1;
+      min-width: 180px;
+    }
   </style>
 </head>
 
@@ -714,10 +755,10 @@
       </div>
     </header>
 
-    <!-- MAIN 4-PANEL BENTO HUD -->
+    <!-- MAIN BENTO HUD -->
     <main class="bento-dashboard">
 
-      <!-- PANEL 1: FTF COMPUTER HACK (3 CONSECUTIVE SKILL CHECKS) -->
+      <!-- PANEL 1: FTF COMPUTER HACK -->
       <section class="panel span-6" id="panel-hack">
         <div>
           <div class="panel-head">
@@ -725,13 +766,13 @@
             <span class="panel-tag">FTF • 5 COMPS</span>
           </div>
           <p class="panel-sub" style="margin-top:8px;">
-            hit <strong>Space</strong> or tap the button inside the green zone 3 times in a row. miss once and the beast hears the error alert.
+            hit <strong>Space</strong> or tap inside the green zone 3 times in a row. miss once and another player—the beast—hears the error ping.
           </p>
         </div>
 
         <div class="ftf-monitor" id="ftf-monitor">
           <div class="ftf-top-row">
-            <span id="ftf-stage-label">COMPUTER #3/5 // EXIT DOORS: LOCKED</span>
+            <span>COMPUTER #3/5 // EXIT DOORS: LOCKED</span>
             <div class="pips-row">
               <span class="pip" id="pip-1"></span>
               <span class="pip" id="pip-2"></span>
@@ -745,7 +786,7 @@
           </div>
 
           <div class="ftf-readout" id="ftf-readout">
-            don't camp the vents—finish the hack before the beast rotates.
+            don't camp the vents—finish the hack before the beast player rotates over.
           </div>
 
           <div class="secret-reward-box" id="secret-reward">
@@ -756,7 +797,7 @@
         <button class="hud-btn" id="hack-action-btn">hit skill check (space / tap)</button>
       </section>
 
-      <!-- PANEL 2: FOUNTAIN OF DREAMS (RIGGED EDITION) -->
+      <!-- PANEL 2: FOUNTAIN OF DREAMS -->
       <section class="panel span-6" id="panel-fountain">
         <div>
           <div class="panel-head">
@@ -764,7 +805,7 @@
             <span class="panel-tag">DIVINIA • RIGGED</span>
           </div>
           <p class="panel-sub" style="margin-top:8px;">
-            traderie prices are crazy anyway. toss 250 diamonds, pick a story choice, and hope the fountain girl doesn't rob you.
+            traderie prices are wild anyway. toss 250 diamonds, pick a story choice, and see if the fountain gives you XP or actually drops a halo.
           </p>
         </div>
 
@@ -774,7 +815,7 @@
             <span id="rh-xp">✨ +0 XP</span>
           </div>
           <p class="fountain-prompt" id="fountain-prompt">
-            the fountain water glows while someone argues in chat about shadow empress vs gothicutie fits. pick an option:
+            the fountain water glows while people argue in chat about shadow empress vs gothicutie fits. pick an option:
           </p>
 
           <div class="choices-grid" id="choices-grid">
@@ -792,7 +833,7 @@
         <button class="hud-btn" id="fountain-reset-btn">toss 250 diamonds for next wish</button>
       </section>
 
-      <!-- PANEL 3: SUNSET ISLAND VOTING ("WHY JULIA WINS") -->
+      <!-- PANEL 3: SUNSET ISLAND VOTING -->
       <section class="panel span-6" id="panel-sunset">
         <div>
           <div class="panel-head">
@@ -800,7 +841,7 @@
             <span class="panel-tag">THEME: ACTUALLY ON-THEME</span>
           </div>
           <p class="panel-sub" style="margin-top:8px;">
-            unlike the people wearing a giant ballgown for "sporty," you actually understand the assignment. tap a rose:
+            unlike the people wearing a giant royale rebel skirt for "sporty," you actually follow the theme. tap a rose:
           </p>
         </div>
 
@@ -817,15 +858,15 @@
         </div>
       </section>
 
-      <!-- PANEL 4: FREEZE POD RESCUE CLICKER (8s) -->
+      <!-- PANEL 4: FREEZE POD RESCUE CLICKER -->
       <section class="panel span-6" id="panel-pod">
         <div>
           <div class="panel-head">
             <span class="panel-title">04 // freeze pod rescue</span>
-            <span class="panel-tag">8.0s • BEAST CAMPING</span>
+            <span class="panel-tag">8.0s • BEAST PLAYER CAMPING</span>
           </div>
           <p class="panel-sub" style="margin-top:8px;">
-            beast is camping right next to the pod with a dark bone crusher. mash fast to break the freeze before the bar hits empty.
+            the beast player is camping right by the pod with a dark bone crusher. mash fast to shatter the freeze before the health bar hits empty.
           </p>
         </div>
 
@@ -846,11 +887,37 @@
           </div>
 
           <div class="pod-msg" id="pod-msg">
-            crawl-dodge the swing if you have to, just hit start and mash.
+            crawl-dodge the hammer swing if you have to, just hit start and mash.
           </div>
         </div>
 
         <button class="hud-btn" id="pod-action-btn">start pod rescue (8s)</button>
+      </section>
+
+      <!-- PANEL 5: LOVE LETTER -->
+      <section class="panel span-12" id="panel-letter">
+        <div>
+          <div class="panel-head">
+            <span class="panel-title">05 // encrypted note for julia</span>
+            <span class="panel-tag">OPEN ENVELOPE</span>
+          </div>
+        </div>
+
+        <div class="letter-stage" id="letter-stage">
+          <p class="letter-locked-prompt">
+            tap "open note" below to read it 💌
+          </p>
+          <p class="letter-body-text" id="letter-body-text">
+            julia, from the deep of my heart i love you SOOOO much, i hope you realise youre an amazing person and even tho we barely talk talking to you makes me feel so amazing. YOURE SO BEAUTIFUL TOO andd i just love you sosoosossoosos much my love
+          </p>
+        </div>
+
+        <div class="letter-actions-row">
+          <button class="hud-btn" id="open-letter-btn">💌 open note</button>
+          <button class="hud-btn" id="copy-letter-btn" style="background: rgba(255,255,255,0.08); color: var(--text-primary); border: 1px solid var(--hud-border);">
+            copy text
+          </button>
+        </div>
       </section>
 
     </main>
@@ -858,7 +925,7 @@
 
   <script>
     /* ========================================================================
-       1. WEB AUDIO SYNTHESIZER (CHIMES, SKILL CHECKS, HEARTBEAT & CLICKS)
+       1. WEB AUDIO SYNTHESIZER
        ======================================================================== */
     let sfxOn = true;
     let ctxAudio = null;
@@ -907,7 +974,6 @@
           osc.stop(st + 0.25);
         });
       } else if (type === 'alert') {
-        // Beast error alert + low heartbeat thump
         const osc = ac.createOscillator();
         const g = ac.createGain();
         osc.type = 'sawtooth';
@@ -960,7 +1026,7 @@
     });
 
     /* ========================================================================
-       2. MODE TOGGLE ([ROYALE HIGH] vs [FACILITY])
+       2. MODE TOGGLE
        ======================================================================== */
     const btnRoyale = document.getElementById('btn-mode-royale');
     const btnFacility = document.getElementById('btn-mode-facility');
@@ -972,7 +1038,7 @@
       btnFacility.classList.toggle('active', mode === 'facility');
       statusReadout.textContent = mode === 'royale'
         ? 'STATUS: CARRYING THE LOBBY'
-        : 'STATUS: 2 EXIT DOORS // BEAST PROXIMITY';
+        : 'STATUS: 2 EXIT DOORS // BEAST PLAYER ACTIVE';
       playSfx('tick');
     }
 
@@ -980,7 +1046,7 @@
     btnFacility.addEventListener('click', () => setMode('facility'));
 
     /* ========================================================================
-       3. PANEL 1: FTF COMPUTER HACK (3 CONSECUTIVE SKILL CHECKS)
+       3. PANEL 1: FTF COMPUTER HACK
        ======================================================================== */
     const skillCursor = document.getElementById('skill-cursor');
     const skillZone = document.getElementById('skill-zone');
@@ -1060,7 +1126,7 @@
           cursorSpeed += 0.25;
           moveGreenZone();
           ftfReadout.style.color = '#99f6e4';
-          ftfReadout.textContent = `nice hit (${streak}/3) — keep going, don't miss the next one.`;
+          ftfReadout.textContent = `nice hit (${streak}/3) — keep going before the beast player spots you.`;
         }
       } else {
         streak = 0;
@@ -1072,7 +1138,7 @@
         void alertFlash.offsetWidth;
         alertFlash.classList.add('active');
         ftfReadout.style.color = '#fb7185';
-        ftfReadout.textContent = 'ERROR! skill check failed — beast got a red alert ping. streak reset.';
+        ftfReadout.textContent = 'ERROR! skill check missed — the beast player saw the red alert ping. streak reset.';
         moveGreenZone();
       }
     }
@@ -1086,7 +1152,7 @@
     });
 
     /* ========================================================================
-       4. PANEL 2: FOUNTAIN OF DREAMS (RIGGED EDITION)
+       4. PANEL 2: FOUNTAIN OF DREAMS
        ======================================================================== */
     const rhDiamondsEl = document.getElementById('rh-diamonds');
     const rhXpEl = document.getElementById('rh-xp');
@@ -1107,7 +1173,7 @@
       ],
       B: [
         { msg: "you skipped the story and the fountain still took your coins. classic.", dimDelta: 0, xpDelta: 100, halo: false },
-        { msg: "0.1% odds actually hit?! you won **julia's custom halo**—equipped to your HUD.", dimDelta: 500, xpDelta: 500, halo: true }
+        { msg: "0.1% odds actually hit?! you won julia's custom halo—equipped to your HUD.", dimDelta: 500, xpDelta: 500, halo: true }
       ],
       C: [
         { msg: "flexing starfrost in divinia park didn't bribe the fountain, just got you +300 XP.", dimDelta: 100, xpDelta: 300, halo: false },
@@ -1131,11 +1197,10 @@
 
         const c = btn.getAttribute('data-choice');
         const list = outcomesByChoice[c];
-        // Guarantee custom halo on the 3rd wish if not yet won
         let pick = list[Math.floor(Math.random() * list.length)];
         if (wishCount === 3 && !haloPill.classList.contains('visible')) {
           pick = {
-            msg: "okay fine, 3rd time's the charm—you pulled **julia's custom halo**! equipped to your profile.",
+            msg: "okay fine, 3rd time's the charm—you pulled julia's custom halo! equipped to your profile.",
             dimDelta: 750,
             xpDelta: 600,
             halo: true
@@ -1167,14 +1232,14 @@
     });
 
     /* ========================================================================
-       5. PANEL 3: SUNSET ISLAND VOTING (3 ROSES)
+       5. PANEL 3: SUNSET ISLAND VOTING
        ======================================================================== */
     const roseBtns = document.querySelectorAll('.rose-btn');
     const voteCard = document.getElementById('vote-card');
 
     const roseNotes = [
       "actually follows the sunset island theme instead of wearing a giant skirt for 'sporty.' instant first place.",
-      "carries the team on facility while the beast camps the pod—2018 anniversary hammer energy.",
+      "carries the team on facility while another player as the beast camps the pod—2018 anniversary hammer energy.",
       "easily one of the coolest people online rn, no inflated traderie price tag needed."
     ];
 
@@ -1188,7 +1253,7 @@
     });
 
     /* ========================================================================
-       6. PANEL 4: FREEZE POD RESCUE CLICKER (8 SECONDS)
+       6. PANEL 4: FREEZE POD RESCUE CLICKER
        ======================================================================== */
     const podActionBtn = document.getElementById('pod-action-btn');
     const podFill = document.getElementById('pod-fill');
@@ -1211,7 +1276,7 @@
       podProgressTxt.textContent = 'RESCUE: 0%';
       podTimeTxt.textContent = 'TIMER: 8.0s';
       frostSvg.style.opacity = '0.6';
-      podMsg.textContent = 'MASH NOW! beast is swinging the hammer!';
+      podMsg.textContent = 'MASH NOW! the beast player is swinging the hammer!';
       podActionBtn.textContent = '💥 MASH TO BREAK ICE!';
 
       clearInterval(podTimerInterval);
@@ -1236,7 +1301,7 @@
         podActionBtn.textContent = '↻ run it back';
         playSfx('win');
       } else {
-        podMsg.textContent = 'freeze bar ran out—beast got the hook. hit retry and mash faster.';
+        podMsg.textContent = 'freeze bar ran out—beast player got the capture. hit retry and mash faster.';
         podActionBtn.textContent = '↻ retry rescue (8s)';
         playSfx('alert');
       }
@@ -1264,7 +1329,43 @@
     });
 
     /* ========================================================================
-       7. BACKGROUND PARTICLE CANVAS & CURSOR AURA
+       7. PANEL 5: LOVE LETTER CONTROLS
+       ======================================================================== */
+    const letterStage = document.getElementById('letter-stage');
+    const openLetterBtn = document.getElementById('open-letter-btn');
+    const copyLetterBtn = document.getElementById('copy-letter-btn');
+    const letterBodyText = document.getElementById('letter-body-text');
+
+    openLetterBtn.addEventListener('click', () => {
+      const willOpen = !letterStage.classList.contains('opened');
+      letterStage.classList.toggle('opened', willOpen);
+      openLetterBtn.textContent = willOpen ? '💌 close note' : '💌 open note';
+      if (willOpen) {
+        playSfx('win');
+        if (typeof confetti === 'function') {
+          confetti({ particleCount: 45, spread: 55, origin: { y: 0.75 } });
+        }
+      } else {
+        playSfx('tick');
+      }
+    });
+
+    copyLetterBtn.addEventListener('click', async () => {
+      const text = letterBodyText.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyLetterBtn.textContent = 'copied ✓';
+      } catch {
+        copyLetterBtn.textContent = 'select & copy';
+      }
+      playSfx('tick');
+      setTimeout(() => {
+        copyLetterBtn.textContent = 'copy text';
+      }, 1600);
+    });
+
+    /* ========================================================================
+       8. BACKGROUND PARTICLE CANVAS & CURSOR AURA
        ======================================================================== */
     const hudCanvas = document.getElementById('hud-canvas');
     const hctx = hudCanvas.getContext('2d');
@@ -1304,7 +1405,6 @@
       hctx.clearRect(0, 0, cw, ch);
       const isFacility = document.documentElement.getAttribute('data-mode') === 'facility';
 
-      // Ambient glow following pointer
       const rad = hctx.createRadialGradient(mx, my, 10, mx, my, 340);
       rad.addColorStop(0, isFacility ? 'rgba(0, 245, 212, 0.11)' : 'rgba(255, 105, 180, 0.15)');
       rad.addColorStop(1, 'transparent');
@@ -1312,7 +1412,6 @@
       hctx.fillRect(0, 0, cw, ch);
 
       if (isFacility) {
-        // Dark terminal grid
         hctx.strokeStyle = 'rgba(0, 245, 212, 0.05)';
         hctx.lineWidth = 1;
         const step = 40;
@@ -1336,7 +1435,6 @@
           hctx.fillStyle = Math.random() > 0.35 ? '#00f5d4' : '#ef4444';
           hctx.fillRect(p.x, p.y, p.size * 1.2, p.size * 1.2);
         } else {
-          // Diamond shape
           hctx.fillStyle = '#ff69b4';
           hctx.beginPath();
           hctx.moveTo(p.x, p.y - p.size * 1.6);
