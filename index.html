@@ -2,66 +2,69 @@
 <html lang="en" data-theme="princess">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>for julia ✧ royal terminal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <style>
     /* ==========================================================================
-       1. THEME VARIABLES (PRINCESS MODE vs. FACILITY ESCAPE MODE)
+       1. THEME TOKENS & CUSTOM PROPERTIES
        ========================================================================== */
     :root {
-      --bg-gradient: linear-gradient(135deg, #fff0f7 0%, #f5ebff 50%, #ffe6f2 100%);
-      --bg-pattern: radial-gradient(rgba(232, 121, 185, 0.14) 1px, transparent 1px);
-      --surface-bg: rgba(255, 255, 255, 0.72);
-      --surface-border: rgba(255, 182, 222, 0.65);
-      --surface-shadow: 0 18px 40px -12px rgba(214, 112, 173, 0.22);
-      --text-main: #3b2338;
-      --text-muted: #7a5875;
-      --accent-primary: #ff5ca8;
+      --bg-base: #fff0f8;
+      --bg-gradient: radial-gradient(circle at 20% 10%, #ffe4f3 0%, #f5e9ff 48%, #ffeaf4 100%);
+      --surface-bg: rgba(255, 255, 255, 0.68);
+      --surface-elevated: rgba(255, 255, 255, 0.85);
+      --surface-border: rgba(255, 175, 220, 0.72);
+      --inner-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      --surface-shadow: 0 22px 48px -14px rgba(214, 92, 162, 0.22), 0 4px 14px -4px rgba(168, 85, 247, 0.08);
+      --text-main: #351d33;
+      --text-muted: #785575;
+      --accent-primary: #ff4fa3;
       --accent-secondary: #a855f7;
       --accent-gold: #f59e0b;
-      --btn-bg: linear-gradient(135deg, #ff6bb0 0%, #c084fc 100%);
+      --btn-bg: linear-gradient(135deg, #ff5ca8 0%, #b56bff 100%);
       --btn-text: #ffffff;
-      --btn-shadow: 0 8px 20px -4px rgba(255, 92, 168, 0.45);
-      --badge-bg: rgba(255, 92, 168, 0.12);
-      --badge-text: #d93884;
+      --btn-shadow: 0 10px 24px -6px rgba(255, 79, 163, 0.45);
+      --badge-bg: rgba(255, 79, 163, 0.12);
+      --badge-text: #d62d80;
       --font-display: 'Playfair Display', serif;
       --font-mono: 'JetBrains Mono', monospace;
       --font-body: 'Plus Jakarta Sans', sans-serif;
       --card-radius: 26px;
-      --particle-color: #ff77bc;
+      --transition-sweep-color: rgba(255, 194, 228, 0.92);
     }
 
     [data-theme="facility"] {
-      --bg-gradient: radial-gradient(circle at 50% 0%, #101926 0%, #070a0f 75%);
-      --bg-pattern: linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
-      --surface-bg: rgba(13, 20, 31, 0.85);
-      --surface-border: rgba(0, 240, 255, 0.35);
-      --surface-shadow: 0 18px 40px -12px rgba(0, 240, 255, 0.15);
-      --text-main: #e2f1f8;
-      --text-muted: #849eb0;
+      --bg-base: #05080d;
+      --bg-gradient: radial-gradient(circle at 50% 0%, #0e1a2b 0%, #06090f 78%);
+      --surface-bg: rgba(10, 17, 28, 0.78);
+      --surface-elevated: rgba(15, 25, 40, 0.9);
+      --surface-border: rgba(0, 240, 255, 0.34);
+      --inner-highlight: inset 0 1px 0 rgba(0, 240, 255, 0.22);
+      --surface-shadow: 0 22px 48px -14px rgba(0, 0, 0, 0.75), 0 0 24px -6px rgba(0, 240, 255, 0.16);
+      --text-main: #e6f4fa;
+      --text-muted: #829cb0;
       --accent-primary: #00f0ff;
       --accent-secondary: #ff2a5f;
       --accent-gold: #00ff9d;
-      --btn-bg: linear-gradient(135deg, #00d2ff 0%, #0077ff 100%);
+      --btn-bg: linear-gradient(135deg, #00e5ff 0%, #0077ff 100%);
       --btn-text: #040911;
-      --btn-shadow: 0 8px 20px -4px rgba(0, 240, 255, 0.4);
+      --btn-shadow: 0 10px 24px -6px rgba(0, 240, 255, 0.42);
       --badge-bg: rgba(0, 240, 255, 0.12);
       --badge-text: #00f0ff;
       --font-display: 'JetBrains Mono', monospace;
-      --card-radius: 14px;
-      --particle-color: #00f0ff;
+      --card-radius: 16px;
+      --transition-sweep-color: rgba(0, 240, 255, 0.85);
     }
 
     /* ==========================================================================
-       2. GLOBAL & RESET
+       2. RESET & BASE STYLES
        ========================================================================== */
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -69,55 +72,124 @@
 
     html {
       scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
       font-family: var(--font-body);
-      background: var(--bg-gradient);
+      background-color: var(--bg-base);
+      background-image: var(--bg-gradient);
       color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
-      transition: background 0.5s ease, color 0.4s ease;
+      transition: background-color 0.5s ease, color 0.4s ease;
       position: relative;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: var(--bg-pattern);
-      background-size: 28px 28px;
-      pointer-events: none;
-      z-index: 0;
+    button {
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
     }
 
-    /* Scanline effect exclusively in Facility Mode */
-    [data-theme="facility"] body::after {
-      content: "";
+    /* CRT Scanlines & Vignette in Facility Mode */
+    .crt-overlay {
       position: fixed;
       inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.14),
-        rgba(0, 0, 0, 0.14) 1px,
-        transparent 1px,
-        transparent 3px
-      );
       pointer-events: none;
-      z-index: 999;
+      z-index: 900;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+      background:
+        radial-gradient(circle at center, transparent 58%, rgba(0, 0, 0, 0.58) 100%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.16) 0px,
+          rgba(0, 0, 0, 0.16) 1px,
+          transparent 1px,
+          transparent 3px
+        );
     }
 
+    [data-theme="facility"] .crt-overlay {
+      opacity: 1;
+    }
+
+    /* Low-time Heartbeat Pulse Vignette for Rescue Mini-Game */
+    .heartbeat-vignette {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 950;
+      opacity: 0;
+      box-shadow: inset 0 0 90px 24px rgba(255, 42, 95, 0.65);
+      transition: opacity 0.25s ease;
+    }
+
+    .heartbeat-vignette.active {
+      opacity: 1;
+      animation: heartbeatPulse 0.65s infinite ease-in-out;
+    }
+
+    @keyframes heartbeatPulse {
+      0%, 100% { transform: scale(1); opacity: 0.55; }
+      50% { transform: scale(1.015); opacity: 1; }
+    }
+
+    /* Mode Transition Sweep */
+    .mode-sweep {
+      position: fixed;
+      inset: 0;
+      z-index: 9800;
+      pointer-events: none;
+      opacity: 0;
+      background: linear-gradient(120deg, transparent 20%, var(--transition-sweep-color) 50%, transparent 80%);
+      transform: translateX(-110%) skewX(-14deg);
+    }
+
+    .mode-sweep.animating {
+      opacity: 1;
+      animation: sweepAcross 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes sweepAcross {
+      0% { transform: translateX(-110%) skewX(-14deg); opacity: 0.85; }
+      100% { transform: translateX(120%) skewX(-14deg); opacity: 0; }
+    }
+
+    /* Screen Flash on Hack Success */
+    .screen-flash {
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      z-index: 10050;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .screen-flash.flash {
+      animation: flashBang 0.55s ease-out forwards;
+    }
+
+    @keyframes flashBang {
+      0% { opacity: 0.95; }
+      100% { opacity: 0; }
+    }
+
+    /* Layered Ambient Canvas */
     canvas#ambient-canvas {
       position: fixed;
       inset: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 1;
     }
 
     .container {
-      max-width: 1060px;
+      max-width: 1080px;
       margin: 0 auto;
-      padding: 0 22px 90px;
+      padding: 0 20px 96px;
       position: relative;
       z-index: 2;
     }
@@ -128,45 +200,44 @@
     #hack-gate {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, #0d1622 0%, #05080c 100%);
+      background: radial-gradient(circle at 50% 35%, #0e1a29 0%, #04070b 100%);
       z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      transition: opacity 0.65s ease, transform 0.65s ease, visibility 0.65s;
+      padding: 18px;
+      transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.65s;
     }
 
     #hack-gate.unlocked {
       opacity: 0;
-      transform: scale(1.06);
+      transform: scale(1.07);
       visibility: hidden;
       pointer-events: none;
     }
 
     .terminal-box {
       width: 100%;
-      max-width: 480px;
-      background: #0a111a;
-      border: 2px solid #00f0ff;
-      border-radius: 16px;
-      padding: 32px 28px;
-      box-shadow: 0 0 40px rgba(0, 240, 255, 0.2), inset 0 0 20px rgba(0, 240, 255, 0.08);
+      max-width: 490px;
+      background: rgba(9, 15, 24, 0.94);
+      border: 1.5px solid rgba(0, 240, 255, 0.65);
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 0 50px rgba(0, 240, 255, 0.22), inset 0 1px 0 rgba(0, 240, 255, 0.3);
       text-align: center;
       font-family: var(--font-mono);
-      color: #e2f1f8;
-      position: relative;
+      color: #e6f4fa;
     }
 
     .terminal-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       color: #00f0ff;
-      border-bottom: 1px solid rgba(0, 240, 255, 0.25);
+      border-bottom: 1px solid rgba(0, 240, 255, 0.22);
       padding-bottom: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
 
     .status-dot {
@@ -177,37 +248,53 @@
       background: #ff2a5f;
       box-shadow: 0 0 8px #ff2a5f;
       margin-right: 6px;
-      animation: blink 1s infinite;
+      animation: blinkDot 1s infinite;
     }
 
-    @keyframes blink {
-      50% { opacity: 0.3; }
+    @keyframes blinkDot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.25; }
+    }
+
+    .boot-log {
+      text-align: left;
+      font-size: 0.76rem;
+      line-height: 1.55;
+      color: #79a6ba;
+      background: rgba(3, 7, 12, 0.75);
+      border: 1px solid rgba(0, 240, 255, 0.15);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 18px;
+      min-height: 66px;
+    }
+
+    .boot-log .ok {
+      color: #00ff9d;
     }
 
     .terminal-title {
-      font-size: 1.35rem;
+      font-size: 1.28rem;
       font-weight: 700;
       margin-bottom: 8px;
-      letter-spacing: -0.02em;
     }
 
     .terminal-sub {
-      font-size: 0.86rem;
-      color: #849eb0;
-      margin-bottom: 26px;
+      font-size: 0.84rem;
+      color: #8ea9bd;
+      margin-bottom: 22px;
       line-height: 1.5;
     }
 
-    /* Skill-check track */
     .skill-track {
       position: relative;
       width: 100%;
-      height: 36px;
-      background: #04080d;
-      border: 1px solid rgba(0, 240, 255, 0.4);
-      border-radius: 8px;
+      height: 40px;
+      background: #04080e;
+      border: 1px solid rgba(0, 240, 255, 0.45);
+      border-radius: 10px;
       overflow: hidden;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .sweet-spot {
@@ -216,10 +303,11 @@
       bottom: 0;
       left: 42%;
       width: 18%;
-      background: rgba(0, 255, 157, 0.28);
+      background: rgba(0, 255, 157, 0.25);
       border-left: 2px solid #00ff9d;
       border-right: 2px solid #00ff9d;
-      box-shadow: 0 0 16px rgba(0, 255, 157, 0.45);
+      box-shadow: 0 0 18px rgba(0, 255, 157, 0.45);
+      transition: left 0.2s ease, width 0.2s ease;
     }
 
     .needle {
@@ -228,28 +316,29 @@
       bottom: 0;
       width: 6px;
       background: #ffffff;
-      box-shadow: 0 0 12px #00f0ff, 0 0 4px #ffffff;
+      box-shadow: 0 0 14px #00f0ff, 0 0 5px #ffffff;
       left: 0%;
+      will-change: left;
     }
 
     .hack-btn {
       width: 100%;
       padding: 14px 20px;
-      background: #00f0ff;
-      color: #050911;
+      background: linear-gradient(135deg, #00f0ff 0%, #00b8ff 100%);
+      color: #040911;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-family: var(--font-mono);
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       cursor: pointer;
+      box-shadow: 0 0 24px rgba(0, 240, 255, 0.35);
       transition: transform 0.12s ease, box-shadow 0.2s ease;
-      box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
     }
 
     .hack-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 28px rgba(0, 240, 255, 0.6);
+      box-shadow: 0 0 32px rgba(0, 240, 255, 0.6);
     }
 
     .hack-btn:active {
@@ -257,17 +346,18 @@
     }
 
     .hack-feedback {
-      min-height: 22px;
+      min-height: 24px;
       margin-top: 14px;
       font-size: 0.82rem;
       color: #ff2a5f;
+      font-weight: 500;
     }
 
     .skip-hack {
-      margin-top: 16px;
+      margin-top: 14px;
       background: none;
       border: none;
-      color: #5b7385;
+      color: #617d91;
       font-family: var(--font-mono);
       font-size: 0.75rem;
       text-decoration: underline;
@@ -275,11 +365,11 @@
     }
 
     .skip-hack:hover {
-      color: #849eb0;
+      color: #9cb6c9;
     }
 
     /* ==========================================================================
-       4. TOP NAVIGATION & THEME SWITCHER
+       4. TOP BAR & CONTROLS
        ========================================================================== */
     header.top-bar {
       display: flex;
@@ -295,13 +385,15 @@
       align-items: center;
       gap: 8px;
       font-family: var(--font-mono);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      padding: 8px 14px;
+      padding: 9px 15px;
       border-radius: 999px;
       background: var(--surface-bg);
       border: 1px solid var(--surface-border);
-      backdrop-filter: blur(12px);
+      box-shadow: var(--inner-highlight), var(--surface-shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     .controls-group {
@@ -317,7 +409,9 @@
       border: 1px solid var(--surface-border);
       background: var(--surface-bg);
       color: var(--text-main);
-      backdrop-filter: blur(12px);
+      box-shadow: var(--inner-highlight), var(--surface-shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -343,9 +437,10 @@
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
-      backdrop-filter: blur(12px);
-      box-shadow: var(--surface-shadow);
-      transition: all 0.25s ease;
+      box-shadow: var(--inner-highlight), var(--surface-shadow);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.2s ease, border-color 0.3s ease;
     }
 
     .theme-toggle:hover {
@@ -358,8 +453,8 @@
        ========================================================================== */
     .hero {
       text-align: center;
-      padding: 36px 12px 48px;
-      max-width: 720px;
+      padding: 32px 12px 44px;
+      max-width: 740px;
       margin: 0 auto;
     }
 
@@ -369,18 +464,19 @@
       gap: 6px;
       background: var(--badge-bg);
       color: var(--badge-text);
-      padding: 6px 14px;
+      padding: 7px 15px;
       border-radius: 999px;
       font-family: var(--font-mono);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       margin-bottom: 18px;
       border: 1px solid var(--surface-border);
+      box-shadow: var(--inner-highlight);
     }
 
     .hero h1 {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-size: clamp(2.3rem, 5.2vw, 3.75rem);
       line-height: 1.12;
       margin-bottom: 16px;
       letter-spacing: -0.02em;
@@ -393,20 +489,21 @@
     }
 
     .hero p {
-      font-size: 1.06rem;
+      font-size: 1.05rem;
       line-height: 1.65;
       color: var(--text-muted);
-      max-width: 560px;
-      margin: 0 auto 24px;
+      max-width: 570px;
+      margin: 0 auto;
     }
 
     /* ==========================================================================
-       6. BENTO GRID & INTERACTIVE CARDS
+       6. BENTO GRID & 3D TILT GLASS CARDS
        ========================================================================== */
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 22px;
+      gap: 24px;
+      perspective: 1200px;
     }
 
     .card {
@@ -414,45 +511,80 @@
       border: 1px solid var(--surface-border);
       border-radius: var(--card-radius);
       padding: 28px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: var(--surface-shadow);
-      transition: transform 0.3s ease, border-color 0.3s ease, background 0.5s ease, border-radius 0.4s ease;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: var(--inner-highlight), var(--surface-shadow);
+      transition: transform 0.18s ease-out, border-color 0.35s ease, background 0.5s ease, border-radius 0.4s ease;
       position: relative;
       overflow: hidden;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .card:hover {
-      transform: translateY(-4px);
       border-color: var(--accent-primary);
+    }
+
+    /* Subtle specular sheen following mouse inside card */
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 255, 255, 0.22),
+        transparent 65%
+      );
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      z-index: 1;
+    }
+
+    [data-theme="facility"] .card::before {
+      background: radial-gradient(
+        420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(0, 240, 255, 0.14),
+        transparent 65%
+      );
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 2;
     }
 
     .col-span-6 { grid-column: span 6; }
     .col-span-12 { grid-column: span 12; }
 
-    @media (max-width: 820px) {
+    @media (max-width: 840px) {
       .col-span-6 { grid-column: span 12; }
+      .card { padding: 22px; }
     }
 
     .card-tag {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: lowercase;
+      font-size: 0.74rem;
       color: var(--badge-text);
       background: var(--badge-bg);
-      padding: 4px 10px;
+      padding: 4px 11px;
       border-radius: 999px;
       display: inline-block;
       width: fit-content;
       margin-bottom: 14px;
+      border: 1px solid var(--surface-border);
     }
 
     .card h2 {
       font-family: var(--font-display);
-      font-size: 1.55rem;
+      font-size: 1.52rem;
       margin-bottom: 8px;
     }
 
@@ -460,7 +592,7 @@
       font-size: 0.94rem;
       color: var(--text-muted);
       line-height: 1.55;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
 
     .action-btn {
@@ -468,7 +600,7 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 13px 22px;
+      padding: 14px 22px;
       border-radius: 14px;
       border: none;
       background: var(--btn-bg);
@@ -478,13 +610,12 @@
       font-size: 0.88rem;
       cursor: pointer;
       box-shadow: var(--btn-shadow);
-      transition: transform 0.15s ease, filter 0.2s ease;
+      transition: transform 0.12s ease, filter 0.2s ease;
       width: 100%;
     }
 
     .action-btn:hover {
       filter: brightness(1.06);
-      transform: translateY(-2px);
     }
 
     .action-btn:active {
@@ -492,98 +623,181 @@
     }
 
     /* ==========================================================================
-       7. FEATURE 2: FOUNTAIN OF DREAMS / CROWN CUSTOMIZER
+       7. FOUNTAIN OF DREAMS + HALO CUSTOMIZER + INVENTORY
        ========================================================================== */
-    .fountain-stage {
-      background: rgba(255, 255, 255, 0.35);
-      border: 1px dashed var(--surface-border);
-      border-radius: 18px;
-      padding: 20px;
-      text-align: center;
-      margin-bottom: 18px;
-      min-height: 148px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-
-    [data-theme="facility"] .fountain-stage {
-      background: rgba(0, 0, 0, 0.35);
-    }
-
-    .crown-display {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 12px;
-      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
-    }
-
-    .crown-display.spin {
-      transform: scale(1.2) rotate(12deg);
-    }
-
-    .fountain-quote {
-      font-size: 0.95rem;
-      font-weight: 500;
-      line-height: 1.5;
-      color: var(--text-main);
-    }
-
     .halo-swatches {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin-bottom: 16px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
     .swatch-btn {
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      border: 2px solid #ffffff;
+      border: 2.5px solid #ffffff;
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: transform 0.2s ease;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     .swatch-btn:hover, .swatch-btn.active {
       transform: scale(1.22);
     }
 
+    .fountain-stage {
+      background: rgba(255, 255, 255, 0.36);
+      border: 1px dashed var(--surface-border);
+      border-radius: 18px;
+      padding: 18px 16px;
+      text-align: center;
+      margin-bottom: 14px;
+      min-height: 162px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    [data-theme="facility"] .fountain-stage {
+      background: rgba(0, 0, 0, 0.38);
+    }
+
+    .fountain-visual {
+      position: relative;
+      width: 76px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .crown-display {
+      width: 64px;
+      height: 64px;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .crown-display.wishing {
+      animation: floatWish 0.9s ease-in-out infinite;
+    }
+
+    @keyframes floatWish {
+      0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+      50% { transform: translateY(-7px) rotate(8deg) scale(1.12); }
+    }
+
+    .ripple-ring {
+      position: absolute;
+      bottom: 4px;
+      width: 34px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--accent-primary);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .ripple-ring.burst {
+      animation: waterRipple 0.9s ease-out forwards;
+    }
+
+    @keyframes waterRipple {
+      0% { width: 22px; height: 8px; opacity: 0.95; }
+      100% { width: 88px; height: 26px; opacity: 0; }
+    }
+
+    .fountain-quote {
+      font-size: 0.94rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--text-main);
+      max-width: 380px;
+    }
+
+    .badge-inventory {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      min-height: 28px;
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .collected-badge {
+      background: var(--surface-elevated);
+      border: 1px solid var(--surface-border);
+      color: var(--text-main);
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      animation: popIn 0.3s ease;
+    }
+
     /* ==========================================================================
-       8. FEATURE 3: SAVE JULIA FROM THE BEAST MINI-GAME
+       8. FREEZE POD RESCUE GAME (WITH ICE CRACKS, COMBO & PARTICLES)
        ========================================================================== */
     .pod-arena {
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.36);
       border: 1px solid var(--surface-border);
       border-radius: 18px;
-      padding: 20px;
-      margin-bottom: 18px;
+      padding: 18px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
     }
 
     [data-theme="facility"] .pod-arena {
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.42);
+    }
+
+    /* Ice crack overlay that fades/shatters as progress rises */
+    .ice-crack-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.55;
+      transition: opacity 0.25s ease, transform 0.2s ease;
     }
 
     .pod-stats {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-family: var(--font-mono);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       margin-bottom: 10px;
       font-weight: 600;
+      position: relative;
+      z-index: 2;
+    }
+
+    .combo-pill {
+      color: var(--accent-gold);
+      font-weight: 700;
     }
 
     .progress-shell {
       width: 100%;
       height: 22px;
-      background: rgba(0, 0, 0, 0.12);
+      background: rgba(0, 0, 0, 0.14);
       border-radius: 999px;
       overflow: hidden;
       padding: 3px;
       margin-bottom: 12px;
+      position: relative;
+      z-index: 2;
     }
 
     [data-theme="facility"] .progress-shell {
@@ -601,31 +815,33 @@
     .pod-status-text {
       font-size: 0.88rem;
       text-align: center;
-      min-height: 22px;
+      min-height: 24px;
       font-weight: 500;
+      position: relative;
+      z-index: 2;
     }
 
     .shake {
-      animation: shakeAnim 0.25s ease-in-out;
+      animation: shakeCard 0.22s ease-in-out;
     }
 
-    @keyframes shakeAnim {
+    @keyframes shakeCard {
       0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px) rotate(-0.5deg); }
-      75% { transform: translateX(5px) rotate(0.5deg); }
+      25% { transform: translateX(-5px) rotate(-0.6deg); }
+      75% { transform: translateX(5px) rotate(0.6deg); }
     }
 
     /* ==========================================================================
-       9. FEATURE 4: CRYSTAL CAPSULE GACHA ("REASONS YOU'RE COOL")
+       9. CRYSTAL CAPSULE GACHA
        ========================================================================== */
     .gacha-layout {
       display: grid;
-      grid-template-columns: 1fr 1.3fr;
+      grid-template-columns: 1fr 1.35fr;
       gap: 24px;
       align-items: center;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 740px) {
       .gacha-layout {
         grid-template-columns: 1fr;
       }
@@ -636,14 +852,14 @@
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.3);
+      padding: 18px 14px;
+      background: rgba(255, 255, 255, 0.32);
       border-radius: 20px;
       border: 1px dashed var(--surface-border);
     }
 
     [data-theme="facility"] .shards-shelf {
-      background: rgba(0, 0, 0, 0.35);
+      background: rgba(0, 0, 0, 0.36);
     }
 
     .crystal-btn {
@@ -652,14 +868,14 @@
       cursor: pointer;
       padding: 8px;
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-      animation: floatShard 3s ease-in-out infinite;
+      animation: floatShard 3.2s ease-in-out infinite;
     }
 
     .crystal-btn:nth-child(2) { animation-delay: 0.5s; }
     .crystal-btn:nth-child(3) { animation-delay: 1s; }
     .crystal-btn:nth-child(4) { animation-delay: 1.5s; }
 
-    .crystal-btn:hover {
+    .crystal-btn:hover, .crystal-btn:active {
       transform: scale(1.18) translateY(-6px);
     }
 
@@ -669,30 +885,30 @@
     }
 
     .note-reveal-box {
-      background: rgba(255, 255, 255, 0.55);
+      background: rgba(255, 255, 255, 0.58);
       border: 1px solid var(--surface-border);
       border-radius: 20px;
       padding: 24px;
-      min-height: 155px;
+      min-height: 156px;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      position: relative;
+      box-shadow: var(--inner-highlight);
     }
 
     [data-theme="facility"] .note-reveal-box {
-      background: rgba(6, 12, 20, 0.7);
+      background: rgba(6, 12, 20, 0.72);
     }
 
     .note-counter {
       font-family: var(--font-mono);
-      font-size: 0.75rem;
+      font-size: 0.74rem;
       color: var(--text-muted);
       margin-bottom: 8px;
     }
 
     .note-content {
-      font-size: 1.05rem;
+      font-size: 1.04rem;
       line-height: 1.6;
       font-weight: 500;
     }
@@ -702,39 +918,43 @@
     }
 
     @keyframes popIn {
-      0% { opacity: 0; transform: scale(0.92) translateY(8px); }
+      0% { opacity: 0; transform: scale(0.93) translateY(8px); }
       100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
     /* ==========================================================================
-       10. FOOTER NOTE & CURSOR TRAIL
+       10. FOOTER & POINTER TRAIL
        ========================================================================== */
     footer.footer-note {
       text-align: center;
-      margin-top: 48px;
+      margin-top: 52px;
       font-family: var(--font-mono);
       font-size: 0.82rem;
       color: var(--text-muted);
     }
 
-    .cursor-dot {
+    .trail-glyph {
       position: fixed;
       pointer-events: none;
-      z-index: 9998;
+      z-index: 9997;
       transform: translate(-50%, -50%);
-      animation: fadeTrail 0.65s forwards ease-out;
+      animation: trailFade 0.65s ease-out forwards;
     }
 
-    @keyframes fadeTrail {
-      0% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0; transform: translate(-50%, -18px) scale(0.2); }
+    @keyframes trailFade {
+      0% { opacity: 0.95; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -20px) scale(0.25); }
     }
   </style>
 </head>
 
 <body>
-  <!-- Ambient Background Canvas -->
+  <!-- Atmosphere & FX Layers -->
   <canvas id="ambient-canvas"></canvas>
+  <div class="crt-overlay"></div>
+  <div class="heartbeat-vignette" id="heartbeat-vignette"></div>
+  <div class="mode-sweep" id="mode-sweep"></div>
+  <div class="screen-flash" id="screen-flash"></div>
 
   <!-- ========================================================================
        FEATURE 1: "FACILITY HACK" INTRO GATE
@@ -742,13 +962,15 @@
   <div id="hack-gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
     <div class="terminal-box">
       <div class="terminal-header">
-        <span><i class="status-dot"></i>SYSTEM LOCKED // PC-01</span>
-        <span>ACCESS: JULIA_ONLY</span>
+        <span><i class="status-dot"></i>FACILITY_OS // PC-01</span>
+        <span>TARGET: JULIA</span>
       </div>
+
+      <div class="boot-log" id="boot-log"></div>
 
       <h2 class="terminal-title" id="gate-title">bypass security terminal</h2>
       <p class="terminal-sub">
-        hit <strong>SPACEBAR</strong> or tap the button when the white cursor enters the green sweet spot to unlock your page.
+        hit <strong>SPACEBAR</strong> or tap the button right when the white bar crosses the green zone.
       </p>
 
       <div class="skill-track" id="skill-track">
@@ -756,7 +978,7 @@
         <div class="needle" id="needle"></div>
       </div>
 
-      <button class="hack-btn" id="hack-trigger-btn">[ EXECUTE SKILL CHECK ]</button>
+      <button class="hack-btn" id="hack-trigger-btn">[ HIT SKILL CHECK ]</button>
       <div class="hack-feedback" id="hack-feedback"></div>
 
       <button class="skip-hack" id="skip-hack-btn">skip hack (i promise i'm julia)</button>
@@ -764,28 +986,25 @@
   </div>
 
   <!-- ========================================================================
-       MAIN PAGE CONTENT
+       MAIN PAGE
        ======================================================================== -->
   <div class="container">
-    <!-- Top Header & Theme Switcher -->
     <header class="top-bar">
       <div class="brand-tag">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
         </svg>
-        <!-- CUSTOMIZE HERE: Change the small top-left tag if you want -->
-        <span>made for julia // v1.0</span>
+        <!-- CUSTOMIZE HERE: Top-left badge text -->
+        <span>made for julia // v2.0</span>
       </div>
 
       <div class="controls-group">
-        <button class="icon-btn" id="sound-toggle" title="toggle sound effects" aria-label="Toggle sound">
-          <!-- Speaker On SVG -->
+        <button class="icon-btn" id="sound-toggle" title="toggle sound" aria-label="Toggle sound">
           <svg id="icon-sound-on" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
             <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
           </svg>
-          <!-- Speaker Off SVG (hidden initially) -->
           <svg id="icon-sound-off" style="display:none" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <line x1="23" y1="9" x2="17" y2="15"></line>
@@ -800,50 +1019,55 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
-      <div class="hero-pill" id="hero-badge">✦ royal terminal // access granted ✦</div>
-      <!-- CUSTOMIZE HERE: Main Hero Headline & Intro -->
+      <div class="hero-pill" id="hero-badge">✦ royale high &amp; facility escape ✦</div>
+      <!-- CUSTOMIZE HERE: Main headline and intro copy -->
       <h1>
-        hey <span class="highlight">julia</span>, welcome to your corner of the internet.
+        hey <span class="highlight">julia</span>, this one's built for you.
       </h1>
       <p>
-        half royale high sparkles, half surviving the beast without failing a single skill check. made this little site just for you—mess around with everything below.
+        half pastel crowns and fountain luck, half surviving the beast without missing a beat. try the mini-games, pick a crown glow, and open the crystals.
       </p>
     </section>
 
-    <!-- Main Interactive Bento Grid -->
+    <!-- Bento Cards -->
     <main class="bento-grid">
-      
-      <!-- CARD 1: FOUNTAIN OF DREAMS & HALO CUSTOMIZER -->
-      <article class="card col-span-6">
+
+      <!-- CARD 1: FOUNTAIN OF DREAMS + HALO CUSTOMIZER -->
+      <article class="card col-span-6 tilt-card">
         <div>
           <span class="card-tag">royale high // fountain of dreams</span>
-          <h2>toss a diamond in</h2>
+          <h2>make a wish &amp; pick a glow</h2>
           <p class="card-desc">
-            pick your halo glow color and see what the fountain spirits have to say today. (spoiler: zero diamond loss guaranteed).
+            switch the crown color, toss a diamond into the fountain, and collect session badges along the way.
           </p>
 
-          <!-- Halo Color Swatches -->
-          <div class="halo-swatches" aria-label="Choose crown color">
-            <button class="swatch-btn active" style="background: #ff5ca8;" data-color="#ff5ca8" title="valentina pink"></button>
-            <button class="swatch-btn" style="background: #a855f7;" data-color="#a855f7" title="starlight lavender"></button>
-            <button class="swatch-btn" style="background: #f59e0b;" data-color="#f59e0b" title="glimmering gold"></button>
-            <button class="swatch-btn" style="background: #00f0ff;" data-color="#00f0ff" title="cyber cyan"></button>
+          <div class="halo-swatches" aria-label="Halo color options">
+            <button class="swatch-btn active" style="background:#ff4fa3;" data-color="#ff4fa3" title="rose quartz"></button>
+            <button class="swatch-btn" style="background:#a855f7;" data-color="#a855f7" title="starlight violet"></button>
+            <button class="swatch-btn" style="background:#f59e0b;" data-color="#f59e0b" title="solar gold"></button>
+            <button class="swatch-btn" style="background:#00f0ff;" data-color="#00f0ff" title="ice cyan"></button>
           </div>
 
           <div class="fountain-stage">
-            <!-- Inline SVG Crown / Halo -->
-            <svg class="crown-display" id="crown-svg" viewBox="0 0 64 64" fill="none">
-              <ellipse cx="32" cy="14" rx="20" ry="5" stroke="#ff5ca8" stroke-width="2.5" stroke-dasharray="4 3"/>
-              <path d="M12 46L8 24L22 34L32 20L42 34L56 24L52 46H12Z" fill="#ff5ca8" fill-opacity="0.22" stroke="#ff5ca8" stroke-width="2.5" stroke-linejoin="round"/>
-              <circle cx="32" cy="14" r="2.5" fill="#ff5ca8"/>
-              <circle cx="8" cy="21" r="2" fill="#ff5ca8"/>
-              <circle cx="56" cy="21" r="2" fill="#ff5ca8"/>
-            </svg>
+            <div class="fountain-visual">
+              <div class="ripple-ring" id="fountain-ripple"></div>
+              <svg class="crown-display" id="crown-svg" viewBox="0 0 64 64" fill="none">
+                <ellipse cx="32" cy="14" rx="20" ry="5" stroke="#ff4fa3" stroke-width="2.5" stroke-dasharray="4 3"/>
+                <path d="M12 46L8 24L22 34L32 20L42 34L56 24L52 46H12Z" fill="#ff4fa3" fill-opacity="0.22" stroke="#ff4fa3" stroke-width="2.5" stroke-linejoin="round"/>
+                <circle cx="32" cy="14" r="2.6" fill="#ff4fa3"/>
+                <circle cx="8" cy="21" r="2.1" fill="#ff4fa3"/>
+                <circle cx="56" cy="21" r="2.1" fill="#ff4fa3"/>
+              </svg>
+            </div>
             <p class="fountain-quote" id="fountain-text">
-              "the fountain is waiting... drop a diamond to read your fortune."
+              "drop a diamond in and see what the fountain says today."
             </p>
+          </div>
+
+          <div class="badge-inventory" id="badge-inventory">
+            <span>collected badges: none yet</span>
           </div>
         </div>
 
@@ -852,56 +1076,65 @@
         </button>
       </article>
 
-      <!-- CARD 2: FLEE THE FACILITY MINI-GAME -->
-      <article class="card col-span-6" id="beast-card">
+      <!-- CARD 2: FREEZE POD RESCUE GAME -->
+      <article class="card col-span-6 tilt-card" id="beast-card">
         <div>
-          <span class="card-tag">flee the facility // rescue mission</span>
-          <h2>break the freeze pod</h2>
+          <span class="card-tag">flee the facility // pod rescue</span>
+          <h2>shatter the freeze pod</h2>
           <p class="card-desc">
-            the beast is literally camping right outside the door. mash the button as fast as you can to shatter the ice before the timer hits zero.
+            the beast is right around the corner. tap or click fast to build combo power and crack the ice before time runs out.
           </p>
 
-          <div class="pod-arena">
+          <div class="pod-arena" id="pod-arena">
+            <!-- Frost/Ice Crack Overlay -->
+            <svg class="ice-crack-svg" id="ice-cracks" viewBox="0 0 360 140" preserveAspectRatio="none">
+              <polyline points="20,10 85,48 130,35 190,82 265,60 340,115" stroke="#9beeff" stroke-width="1.6" fill="none"/>
+              <polyline points="85,48 65,105 110,130" stroke="#9beeff" stroke-width="1.3" fill="none"/>
+              <polyline points="190,82 225,128 290,118" stroke="#9beeff" stroke-width="1.3" fill="none"/>
+            </svg>
+
             <div class="pod-stats">
-              <span id="pod-percent">pod integrity: 100%</span>
+              <span id="pod-percent">rescue: 0%</span>
+              <span class="combo-pill" id="pod-combo">combo: 1x</span>
               <span id="pod-timer">time: 7.0s</span>
             </div>
+
             <div class="progress-shell">
               <div class="progress-fill" id="pod-bar"></div>
             </div>
+
             <p class="pod-status-text" id="pod-status">
-              ready when you are—don't get caught.
+              tap start to begin the rescue run.
             </p>
           </div>
         </div>
 
         <button class="action-btn" id="pod-btn">
-          <span>⚡ start rescue / mash</span>
+          <span>⚡ start rescue</span>
         </button>
       </article>
 
-      <!-- CARD 3: CRYSTAL CAPSULE GACHA ("REASONS YOU'RE COOL") -->
-      <article class="card col-span-12">
+      <!-- CARD 3: CRYSTAL CAPSULE GACHA -->
+      <article class="card col-span-12 tilt-card">
         <div>
-          <span class="card-tag">crystal gacha // click a shard</span>
-          <h2>random notes &amp; reasons you're great</h2>
+          <span class="card-tag">crystal capsules // tap a shard</span>
+          <h2>reasons you're cool &amp; random notes</h2>
           <p class="card-desc">
-            tap any floating crystal shard to pop open a capsule. (no duplicates until you've seen them all).
+            pick any crystal shard to crack open a note. every tap pulls a fresh one until you've seen the whole set.
           </p>
         </div>
 
         <div class="gacha-layout">
           <div class="shards-shelf">
-            <!-- 4 Crisp Inline SVG Crystal Shards -->
-            <button class="crystal-btn" data-shard="0" aria-label="Open pink crystal">
+            <button class="crystal-btn" data-shard="0" aria-label="Pink crystal">
               <svg width="54" height="64" viewBox="0 0 54 64" fill="none">
-                <polygon points="27,4 46,20 40,56 14,56 8,20" fill="#ff5ca8" fill-opacity="0.25" stroke="#ff5ca8" stroke-width="2.5"/>
-                <polyline points="8,20 27,28 46,20" stroke="#ff5ca8" stroke-width="2"/>
-                <line x1="27" y1="4" x2="27" y2="56" stroke="#ff5ca8" stroke-width="1.8"/>
+                <polygon points="27,4 46,20 40,56 14,56 8,20" fill="#ff4fa3" fill-opacity="0.25" stroke="#ff4fa3" stroke-width="2.5"/>
+                <polyline points="8,20 27,28 46,20" stroke="#ff4fa3" stroke-width="2"/>
+                <line x1="27" y1="4" x2="27" y2="56" stroke="#ff4fa3" stroke-width="1.8"/>
               </svg>
             </button>
 
-            <button class="crystal-btn" data-shard="1" aria-label="Open purple crystal">
+            <button class="crystal-btn" data-shard="1" aria-label="Violet crystal">
               <svg width="54" height="64" viewBox="0 0 54 64" fill="none">
                 <polygon points="27,4 46,20 40,56 14,56 8,20" fill="#a855f7" fill-opacity="0.25" stroke="#a855f7" stroke-width="2.5"/>
                 <polyline points="8,20 27,28 46,20" stroke="#a855f7" stroke-width="2"/>
@@ -909,7 +1142,7 @@
               </svg>
             </button>
 
-            <button class="crystal-btn" data-shard="2" aria-label="Open cyan crystal">
+            <button class="crystal-btn" data-shard="2" aria-label="Cyan crystal">
               <svg width="54" height="64" viewBox="0 0 54 64" fill="none">
                 <polygon points="27,4 46,20 40,56 14,56 8,20" fill="#00f0ff" fill-opacity="0.25" stroke="#00f0ff" stroke-width="2.5"/>
                 <polyline points="8,20 27,28 46,20" stroke="#00f0ff" stroke-width="2"/>
@@ -917,7 +1150,7 @@
               </svg>
             </button>
 
-            <button class="crystal-btn" data-shard="3" aria-label="Open gold crystal">
+            <button class="crystal-btn" data-shard="3" aria-label="Gold crystal">
               <svg width="54" height="64" viewBox="0 0 54 64" fill="none">
                 <polygon points="27,4 46,20 40,56 14,56 8,20" fill="#f59e0b" fill-opacity="0.25" stroke="#f59e0b" stroke-width="2.5"/>
                 <polyline points="8,20 27,28 46,20" stroke="#f59e0b" stroke-width="2"/>
@@ -926,10 +1159,10 @@
             </button>
           </div>
 
-          <div class="note-reveal-box" id="note-box">
+          <div class="note-reveal-box">
             <span class="note-counter" id="note-counter">capsule 0 / 8 unlocked</span>
             <p class="note-content" id="note-content">
-              click any of those floating crystals on the left to unlock your first note ✦
+              tap a floating crystal on the left to open your first note ✦
             </p>
           </div>
         </div>
@@ -938,46 +1171,46 @@
     </main>
 
     <footer class="footer-note">
-      <!-- CUSTOMIZE HERE: Change the footer sign-off -->
-      built from scratch for julia • zero lag, 100% effort
+      <!-- CUSTOMIZE HERE: Footer message -->
+      made for julia • princess crowns &amp; clean escapes
     </footer>
   </div>
 
   <!-- ========================================================================
-       JAVASCRIPT LOGIC (AUDIO, GAMES, PARTICLES, THEME SWITCHER)
+       JAVASCRIPT: AUDIO, GAMES, CANVAS DEPTH, 3D TILT & MODE TRANSITIONS
        ======================================================================== -->
   <script>
     /* ========================================================================
-       CUSTOMIZE HERE: PERSONALIZE YOUR MESSAGES & INSIDE JOKES
+       CUSTOMIZE HERE: EDIT FORTUNES, BADGES & PERSONAL NOTES BELOW
        ======================================================================== */
     const FOUNTAIN_FORTUNES = [
-      "you didn't win a halo today, mostly because you already carry the whole lobby anyway.",
-      "the fountain spirits agree: your outfits in royale high clear everyone else's by a mile.",
-      "plot twist: you found +5,000 diamonds and zero jump-scares from the beast today.",
-      "fortune says you're actually too good at hitting skill checks to be playing casually.",
-      "the fountain waters glow bright pink—pretty sure that means you deserve iced coffee today.",
-      "no halo this time, just a reminder that talking to you is easily the best part of my day."
+      { text: "no halo in the water today, mostly because you're already carrying the whole lobby.", badge: "👑 lobby MVP" },
+      { text: "the fountain spirits say your fits clear everyone else's without even trying.", badge: "✨ fit check passed" },
+      { text: "plot twist: +5,000 virtual diamonds and zero beast jump-scares on your next round.", badge: "💎 lucky drop" },
+      { text: "you hit skill checks like you've got ice in your veins—respect.", badge: "⚡ skill-check pro" },
+      { text: "fountain says you deserve your favorite snack or drink today.", badge: "🍓 treat unlocked" },
+      { text: "honestly just happy whenever we get to hang out and talk.", badge: "🌸 good vibes" }
     ];
 
     const COOL_REASONS = [
-      // [EDIT ME] Swap any of these out for your own inside jokes, favorite memories, or dates!
-      "you're genuinely one of the funniest people to talk to without even trying.",
-      "[EDIT ME] add an inside joke here—like that one time in roblox when everything went wrong.",
-      "you have top-tier taste in games, music, and basically everything else.",
-      "[EDIT ME] put a favorite memory or date here (e.g., 'still thinking about how fun [day/event] was').",
-      "even when you're just ranting about random stuff, it's somehow always entertaining.",
-      "10/10 teammate—would definitely trust you to hack the last computer while the beast is nearby.",
-      "[EDIT ME] write something specific you like about her personality or vibe.",
-      "honestly just made this whole site because you deserve cool things."
+      // [EDIT ME] Replace or add your own notes, jokes, or memories below
+      "you're super easy to talk to and make random moments way more fun.",
+      "[EDIT ME] add a funny inside joke or moment from playing together here.",
+      "great taste in games, music, and chaos—honestly a winning combo.",
+      "[EDIT ME] add a favorite memory or a date you liked hanging out.",
+      "you never run out of funny things to say even when nothing's happening.",
+      "[EDIT ME] write something genuine you appreciate about her.",
+      "certified teammate—would let you hold the exit door open any day.",
+      "built this whole site just because i wanted to make something cool for you."
     ];
 
     /* ========================================================================
-       1. WEB AUDIO API SYNTHESIZER (ZERO EXTERNAL MP3s)
+       1. SOFT WEB AUDIO SYNTHESIZER (GENTLE ENVELOPES)
        ======================================================================== */
     let soundEnabled = true;
     let audioCtx = null;
 
-    function initAudio() {
+    function ensureAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
@@ -986,392 +1219,451 @@
       }
     }
 
-    function playTone(type) {
+    function playSoftTone(kind) {
       if (!soundEnabled) return;
-      initAudio();
-
+      ensureAudio();
       const now = audioCtx.currentTime;
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
+      const isFacility = document.documentElement.getAttribute('data-theme') === 'facility';
 
-      if (type === 'click') {
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(520, now);
-        osc.frequency.exponentialRampToValueAtTime(780, now + 0.08);
-        gain.gain.setValueAtTime(0.08, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      if (kind === 'click') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = isFacility ? 'triangle' : 'sine';
+        osc.frequency.setValueAtTime(isFacility ? 360 : 540, now);
+        osc.frequency.exponentialRampToValueAtTime(isFacility ? 220 : 820, now + 0.09);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.07, now + 0.015);
+        gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.1);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
         osc.start(now);
-        osc.stop(now + 0.08);
-      } else if (type === 'sparkle') {
-        // Arpeggio chime for Royale High / Unlock
-        const notes = [587.33, 739.99, 880, 1174.66];
-        notes.forEach((freq, idx) => {
-          const o = audioCtx.createOscillator();
-          const g = audioCtx.createGain();
-          o.type = 'triangle';
-          o.frequency.setValueAtTime(freq, now + idx * 0.06);
-          g.gain.setValueAtTime(0.09, now + idx * 0.06);
-          g.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.06 + 0.35);
-          o.connect(g);
-          g.connect(audioCtx.destination);
-          o.start(now + idx * 0.06);
-          o.stop(now + idx * 0.06 + 0.35);
+        osc.stop(now + 0.11);
+      } else if (kind === 'chime') {
+        // Gentle harp/bell arpeggio
+        const notes = [523.25, 659.25, 783.99, 1046.5];
+        notes.forEach((freq, i) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          const t = now + i * 0.065;
+          osc.frequency.setValueAtTime(freq, t);
+          gain.gain.setValueAtTime(0.001, t);
+          gain.gain.linearRampToValueAtTime(0.075, t + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0008, t + 0.42);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + 0.44);
         });
-      } else if (type === 'error') {
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(160, now);
-        osc.frequency.linearRampToValueAtTime(110, now + 0.18);
-        gain.gain.setValueAtTime(0.09, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+      } else if (kind === 'tap') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(260 + Math.random() * 120, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.07);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.06, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.08);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
         osc.start(now);
-        osc.stop(now + 0.18);
-      } else if (type === 'hit') {
-        osc.type = 'square';
-        osc.frequency.setValueAtTime(240 + Math.random() * 140, now);
-        gain.gain.setValueAtTime(0.05, now);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+        osc.stop(now + 0.09);
+      } else if (kind === 'miss') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(190, now);
+        osc.frequency.linearRampToValueAtTime(115, now + 0.22);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.07, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.24);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
         osc.start(now);
-        osc.stop(now + 0.06);
+        osc.stop(now + 0.25);
+      } else if (kind === 'mode') {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(isFacility ? 210 : 440, now);
+        osc.frequency.exponentialRampToValueAtTime(isFacility ? 420 : 660, now + 0.18);
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.linearRampToValueAtTime(0.06, now + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0008, now + 0.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(now);
+        osc.stop(now + 0.21);
       }
     }
 
-    const soundToggleBtn = document.getElementById('sound-toggle');
-    soundToggleBtn.addEventListener('click', () => {
+    document.getElementById('sound-toggle').addEventListener('click', () => {
       soundEnabled = !soundEnabled;
       document.getElementById('icon-sound-on').style.display = soundEnabled ? 'block' : 'none';
       document.getElementById('icon-sound-off').style.display = soundEnabled ? 'none' : 'block';
-      if (soundEnabled) playTone('click');
+      if (soundEnabled) playSoftTone('click');
     });
 
     /* ========================================================================
-       2. INTRO "FACILITY HACK" SKILL-CHECK MINI-GAME
+       2. INTRO SKILL-CHECK WITH TYPING BOOT & ESCALATING DIFFICULTY
        ======================================================================== */
     const hackGate = document.getElementById('hack-gate');
+    const bootLog = document.getElementById('boot-log');
     const needle = document.getElementById('needle');
     const sweetSpot = document.getElementById('sweet-spot');
     const hackBtn = document.getElementById('hack-trigger-btn');
     const skipHackBtn = document.getElementById('skip-hack-btn');
     const hackFeedback = document.getElementById('hack-feedback');
+    const screenFlash = document.getElementById('screen-flash');
+
+    const bootLines = [
+      "> CONNECTING TO FACILITY SERVER...",
+      "> SCANNING SECURITY PERIMETER... <span class='ok'>[OK]</span>",
+      "> BYPASSING FIREWALL FOR USER: JULIA..."
+    ];
+
+    let lineIdx = 0;
+    let charIdx = 0;
+    let currentLineHtml = "";
+
+    function typeBootSequence() {
+      if (lineIdx >= bootLines.length) return;
+      const fullLine = bootLines[lineIdx];
+      // Print line cleanly with short intervals
+      bootLog.innerHTML = bootLines.slice(0, lineIdx).join("<br>") + (lineIdx > 0 ? "<br>" : "") + fullLine;
+      lineIdx++;
+      setTimeout(typeBootSequence, 320);
+    }
+    typeBootSequence();
 
     let needlePos = 0;
     let needleDir = 1;
-    let needleSpeed = 1.35;
-    let gateActive = true;
+    let needleSpeed = 1.15;
     let sweetStart = 42;
-    const sweetWidth = 18;
+    let sweetWidth = 18;
+    let misses = 0;
+    let gateActive = true;
+    let lastFrameTime = performance.now();
 
-    function randomizeSweetSpot() {
-      sweetStart = Math.floor(Math.random() * 55) + 20;
+    function setupSweetSpot() {
+      sweetWidth = Math.max(12, 18 - misses * 1.5);
+      sweetStart = Math.floor(Math.random() * (75 - sweetWidth)) + 12;
       sweetSpot.style.left = sweetStart + '%';
+      sweetSpot.style.width = sweetWidth + '%';
     }
-    randomizeSweetSpot();
+    setupSweetSpot();
 
-    function animateNeedle() {
+    function loopNeedle(now) {
       if (!gateActive) return;
-      needlePos += needleDir * needleSpeed;
-      if (needlePos >= 98) {
-        needlePos = 98;
+      const dt = Math.min((now - lastFrameTime) / 16.667, 2);
+      lastFrameTime = now;
+
+      needlePos += needleDir * needleSpeed * dt;
+      if (needlePos >= 98.5) {
+        needlePos = 98.5;
         needleDir = -1;
       } else if (needlePos <= 0) {
         needlePos = 0;
         needleDir = 1;
       }
       needle.style.left = needlePos + '%';
-      requestAnimationFrame(animateNeedle);
+      requestAnimationFrame(loopNeedle);
     }
-    requestAnimationFrame(animateNeedle);
+    requestAnimationFrame(loopNeedle);
 
-    function unlockSite() {
+    function completeUnlock() {
       if (!gateActive) return;
       gateActive = false;
-      playTone('sparkle');
+      playSoftTone('chime');
       hackFeedback.style.color = '#00ff9d';
-      hackFeedback.textContent = 'ACCESS GRANTED // WELCOME JULIA ✦';
+      hackFeedback.textContent = 'ACCESS GRANTED // LOADING WORLD...';
+
+      screenFlash.classList.remove('flash');
+      void screenFlash.offsetWidth;
+      screenFlash.classList.add('flash');
 
       if (typeof confetti === 'function') {
         confetti({
-          particleCount: 85,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#ff5ca8', '#a855f7', '#00f0ff', '#ffe066']
+          particleCount: 95,
+          spread: 75,
+          origin: { y: 0.58 },
+          colors: ['#ff4fa3', '#a855f7', '#00f0ff', '#ffe066']
         });
       }
 
       setTimeout(() => {
         hackGate.classList.add('unlocked');
-      }, 450);
+      }, 380);
     }
 
-    function attemptSkillCheck() {
+    function triggerSkillCheck() {
       if (!gateActive) return;
-      if (needlePos >= sweetStart - 2 && needlePos <= sweetStart + sweetWidth + 2) {
-        unlockSite();
+      const hit = needlePos >= sweetStart - 2.2 && needlePos <= sweetStart + sweetWidth + 2.2;
+      if (hit) {
+        completeUnlock();
       } else {
-        playTone('error');
+        misses++;
+        needleSpeed = Math.min(2.4, 1.15 + misses * 0.25);
+        playSoftTone('miss');
         hackFeedback.style.color = '#ff2a5f';
-        hackFeedback.textContent = 'SKILL CHECK FAILED! beast alerted—try again.';
-        randomizeSweetSpot();
+        hackFeedback.textContent = `MISSED! Security tightened (speed ${needleSpeed.toFixed(1)}x) — try again.`;
+        setupSweetSpot();
       }
     }
 
-    hackBtn.addEventListener('click', attemptSkillCheck);
-    skipHackBtn.addEventListener('click', unlockSite);
+    hackBtn.addEventListener('click', triggerSkillCheck);
+    skipHackBtn.addEventListener('click', completeUnlock);
     window.addEventListener('keydown', (e) => {
       if (gateActive && e.code === 'Space') {
         e.preventDefault();
-        attemptSkillCheck();
+        triggerSkillCheck();
       }
     });
 
     /* ========================================================================
-       3. THEME SWITCHER ("PRINCESS MODE" vs "FACILITY ESCAPE MODE")
+       3. THEME SWITCHER WITH SMOOTH SWEEP
        ======================================================================== */
     const themeSwitcher = document.getElementById('theme-switcher');
     const themeIcon = document.getElementById('theme-icon');
     const themeLabel = document.getElementById('theme-label');
     const heroBadge = document.getElementById('hero-badge');
-    let currentTheme = 'princess';
+    const modeSweep = document.getElementById('mode-sweep');
+    let isFacility = false;
 
     themeSwitcher.addEventListener('click', () => {
-      playTone('click');
-      currentTheme = currentTheme === 'princess' ? 'facility' : 'princess';
-      document.documentElement.setAttribute('data-theme', currentTheme);
+      playSoftTone('mode');
+      isFacility = !isFacility;
 
-      if (currentTheme === 'princess') {
-        themeIcon.textContent = '👑';
-        themeLabel.textContent = 'princess mode';
-        heroBadge.textContent = '✦ royal terminal // access granted ✦';
-      } else {
-        themeIcon.textContent = '💻';
-        themeLabel.textContent = 'facility escape mode';
-        heroBadge.textContent = '> TERMINAL_01 // STEALTH PROTOCOL ACTIVE';
-      }
+      modeSweep.classList.remove('animating');
+      void modeSweep.offsetWidth;
+      modeSweep.classList.add('animating');
+
+      setTimeout(() => {
+        document.documentElement.setAttribute('data-theme', isFacility ? 'facility' : 'princess');
+        if (isFacility) {
+          themeIcon.textContent = '💻';
+          themeLabel.textContent = 'facility mode';
+          heroBadge.textContent = '> FACILITY_OS // STEALTH MODE ACTIVE';
+        } else {
+          themeIcon.textContent = '👑';
+          themeLabel.textContent = 'princess mode';
+          heroBadge.textContent = '✦ royale high & facility escape ✦';
+        }
+      }, 140);
     });
 
     /* ========================================================================
-       4. FOUNTAIN OF DREAMS & HALO CUSTOMIZER
+       4. 3D CARD TILT & MOUSE SPECULAR HIGHLIGHT
+       ======================================================================== */
+    document.querySelectorAll('.tilt-card').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * -4.5;
+        const rotateY = ((x - centerX) / centerX) * 4.5;
+
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+        card.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-3px)`;
+      });
+
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0px)';
+      });
+    });
+
+    /* ========================================================================
+       5. FOUNTAIN OF DREAMS + HALO GLOW + SESSION BADGES
        ======================================================================== */
     const fountainBtn = document.getElementById('fountain-btn');
     const fountainText = document.getElementById('fountain-text');
     const crownSvg = document.getElementById('crown-svg');
+    const fountainRipple = document.getElementById('fountain-ripple');
+    const badgeInventory = document.getElementById('badge-inventory');
     const swatches = document.querySelectorAll('.swatch-btn');
-    let lastFortuneIdx = -1;
 
-    swatches.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        playTone('click');
-        swatches.forEach(s => s.classList.remove('active'));
-        btn.classList.add('active');
-        const color = btn.getAttribute('data-color');
+    let wishing = false;
+    let lastFortuneIndex = -1;
+    const collectedBadges = new Set();
 
-        // Recolor inline SVG strokes & fills
-        crownSvg.querySelectorAll('[stroke]').forEach(el => el.setAttribute('stroke', color));
-        crownSvg.querySelectorAll('[fill]').forEach(el => el.setAttribute('fill', color));
+    swatches.forEach((swatch) => {
+      swatch.addEventListener('click', () => {
+        playSoftTone('click');
+        swatches.forEach((s) => s.classList.remove('active'));
+        swatch.classList.add('active');
+        const hex = swatch.getAttribute('data-color');
+        crownSvg.querySelectorAll('[stroke]').forEach((el) => el.setAttribute('stroke', hex));
+        crownSvg.querySelectorAll('[fill]').forEach((el) => el.setAttribute('fill', hex));
       });
     });
 
+    function renderBadges() {
+      if (collectedBadges.size === 0) {
+        badgeInventory.innerHTML = '<span>collected badges: none yet</span>';
+        return;
+      }
+      badgeInventory.innerHTML = '<span>badges:</span> ' +
+        [...collectedBadges].map((b) => `<span class="collected-badge">${b}</span>`).join('');
+    }
+
     fountainBtn.addEventListener('click', () => {
-      playTone('sparkle');
-      crownSvg.classList.remove('spin');
-      void crownSvg.offsetWidth; // trigger reflow
-      crownSvg.classList.add('spin');
+      if (wishing) return;
+      wishing = true;
+      playSoftTone('tap');
 
-      let idx;
-      do {
-        idx = Math.floor(Math.random() * FOUNTAIN_FORTUNES.length);
-      } while (idx === lastFortuneIdx && FOUNTAIN_FORTUNES.length > 1);
-      lastFortuneIdx = idx;
+      crownSvg.classList.add('wishing');
+      fountainRipple.classList.remove('burst');
+      void fountainRipple.offsetWidth;
+      fountainRipple.classList.add('burst');
+      fountainText.textContent = "tossing diamond... wishing...";
 
-      fountainText.textContent = `"${FOUNTAIN_FORTUNES[idx]}"`;
+      setTimeout(() => {
+        crownSvg.classList.remove('wishing');
+        let idx;
+        do {
+          idx = Math.floor(Math.random() * FOUNTAIN_FORTUNES.length);
+        } while (idx === lastFortuneIndex && FOUNTAIN_FORTUNES.length > 1);
+        lastFortuneIndex = idx;
+
+        const item = FOUNTAIN_FORTUNES[idx];
+        fountainText.textContent = `"${item.text}"`;
+        collectedBadges.add(item.badge);
+        renderBadges();
+        playSoftTone('chime');
+        wishing = false;
+      }, 650);
     });
 
     /* ========================================================================
-       5. FLEE THE FACILITY: SAVE JULIA MINI-GAME
+       6. FREEZE POD RESCUE GAME (COMBO, ICE CRACKS & HEARTBEAT VIGNETTE)
        ======================================================================== */
     const podBtn = document.getElementById('pod-btn');
     const podBar = document.getElementById('pod-bar');
     const podPercent = document.getElementById('pod-percent');
+    const podCombo = document.getElementById('pod-combo');
     const podTimer = document.getElementById('pod-timer');
     const podStatus = document.getElementById('pod-status');
+    const iceCracks = document.getElementById('ice-cracks');
     const beastCard = document.getElementById('beast-card');
+    const heartbeatVignette = document.getElementById('heartbeat-vignette');
 
-    let podPlaying = false;
-    let rescueProgress = 0;
+    let rescueActive = false;
+    let progress = 0;
     let timeLeft = 7.0;
-    let podInterval = null;
+    let combo = 1;
+    let lastTapTime = 0;
+    let timerId = null;
 
-    function resetPodGame() {
-      podPlaying = true;
-      rescueProgress = 0;
+    function startRescueGame() {
+      rescueActive = true;
+      progress = 0;
       timeLeft = 7.0;
-      podBar.style.width = '0%';
-      podPercent.textContent = 'rescue progress: 0%';
-      podTimer.textContent = 'time: 7.0s';
-      podStatus.textContent = 'MASH THE BUTTON! beast footsteps getting closer...';
-      podBtn.innerHTML = '<span>💥 MASH TO BREAK POD!</span>';
+      combo = 1;
+      lastTapTime = 0;
 
-      clearInterval(podInterval);
-      podInterval = setInterval(() => {
-        timeLeft -= 0.1;
-        if (timeLeft <= 0) {
-          timeLeft = 0;
-          endPodGame(false);
-        }
+      podBar.style.width = '0%';
+      podPercent.textContent = 'rescue: 0%';
+      podCombo.textContent = 'combo: 1x';
+      podTimer.textContent = 'time: 7.0s';
+      iceCracks.style.opacity = '0.65';
+      podStatus.textContent = 'TAP FAST! fast taps build combo power.';
+      podBtn.innerHTML = '<span>💥 TAP TO SHATTER ICE!</span>';
+
+      clearInterval(timerId);
+      timerId = setInterval(() => {
+        timeLeft = Math.max(0, +(timeLeft - 0.1).toFixed(1));
         podTimer.textContent = `time: ${timeLeft.toFixed(1)}s`;
+
+        if (timeLeft <= 2.5 && timeLeft > 0) {
+          heartbeatVignette.classList.add('active');
+        } else {
+          heartbeatVignette.classList.remove('active');
+        }
+
+        if (timeLeft <= 0) {
+          finishRescue(false);
+        }
       }, 100);
     }
 
-    function endPodGame(won) {
-      podPlaying = false;
-      clearInterval(podInterval);
+    function finishRescue(won) {
+      rescueActive = false;
+      clearInterval(timerId);
+      heartbeatVignette.classList.remove('active');
+
       if (won) {
-        playTone('sparkle');
+        progress = 100;
         podBar.style.width = '100%';
-        podPercent.textContent = 'rescue progress: 100%';
-        podStatus.textContent = 'escaped! julia made it out through the exit door 🎉';
+        podPercent.textContent = 'rescue: 100%';
+        iceCracks.style.opacity = '0';
+        podStatus.textContent = 'pod shattered! julia is free and heading to the exit 🎉';
         podBtn.innerHTML = '<span>↻ play again</span>';
+        playSoftTone('chime');
         if (typeof confetti === 'function') {
-          confetti({ particleCount: 55, spread: 60, origin: { y: 0.7 } });
+          confetti({ particleCount: 60, spread: 65, origin: { y: 0.7 } });
         }
       } else {
-        playTone('error');
-        podStatus.textContent = 'frozen! the beast got you—hit retry to break out.';
+        podStatus.textContent = 'time ran out—beast got close! hit retry and go again.';
         podBtn.innerHTML = '<span>↻ retry rescue</span>';
+        playSoftTone('miss');
       }
     }
 
     podBtn.addEventListener('click', () => {
-      if (!podPlaying) {
-        resetPodGame();
+      if (!rescueActive) {
+        startRescueGame();
         return;
       }
 
-      playTone('hit');
-      rescueProgress += 6.8;
+      const now = Date.now();
+      if (lastTapTime && now - lastTapTime < 230) {
+        combo = Math.min(4, +(combo + 0.25).toFixed(2));
+      } else {
+        combo = Math.max(1, +(combo - 0.25).toFixed(2));
+      }
+      lastTapTime = now;
+
+      playSoftTone('tap');
+      progress += 5.4 * combo;
+
       beastCard.classList.remove('shake');
       void beastCard.offsetWidth;
       beastCard.classList.add('shake');
 
-      if (rescueProgress >= 100) {
-        endPodGame(true);
+      if (progress >= 100) {
+        finishRescue(true);
       } else {
-        podBar.style.width = rescueProgress + '%';
-        podPercent.textContent = `rescue progress: ${Math.floor(rescueProgress)}%`;
+        podBar.style.width = `${progress}%`;
+        podPercent.textContent = `rescue: ${Math.floor(progress)}%`;
+        podCombo.textContent = `combo: ${combo}x`;
+        iceCracks.style.opacity = `${Math.max(0.1, 0.65 - (progress / 100) * 0.5)}`;
       }
     });
 
     /* ========================================================================
-       6. CRYSTAL CAPSULE GACHA ("REASONS YOU'RE COOL")
+       7. CRYSTAL CAPSULE GACHA
        ======================================================================== */
     const crystalBtns = document.querySelectorAll('.crystal-btn');
     const noteContent = document.getElementById('note-content');
     const noteCounter = document.getElementById('note-counter');
-    let availableIndices = [...Array(COOL_REASONS.length).keys()];
-    let unlockedSet = new Set();
+    let pool = [...Array(COOL_REASONS.length).keys()];
+    const seen = new Set();
 
     crystalBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
-        playTone('sparkle');
-        if (availableIndices.length === 0) {
-          availableIndices = [...Array(COOL_REASONS.length).keys()];
+        playSoftTone('chime');
+        if (pool.length === 0) {
+          pool = [...Array(COOL_REASONS.length).keys()];
         }
+        const pick = Math.floor(Math.random() * pool.length);
+        const idx = pool.splice(pick, 1)[0];
+        seen.add(idx);
 
-        const randPick = Math.floor(Math.random() * availableIndices.length);
-        const chosenIdx = availableIndices.splice(randPick, 1)[0];
-        unlockedSet.add(chosenIdx);
-
-        noteCounter.textContent = `capsule ${unlockedSet.size} / ${COOL_REASONS.length} discovered`;
+        noteCounter.textContent = `capsule ${seen.size} / ${COOL_REASONS.length} opened`;
         noteContent.classList.remove('pop-in');
         void noteContent.offsetWidth;
         noteContent.classList.add('pop-in');
-        noteContent.textContent = `"${COOL_REASONS[chosenIdx]}"`;
-      });
-    });
-
-    /* ========================================================================
-       7. AMBIENT CANVAS PARTICLES & CUSTOM CURSOR TRAIL
-       ======================================================================== */
-    const canvas = document.getElementById('ambient-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    for (let i = 0; i < 38; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3.5 + 1.5,
-        speedY: Math.random() * 0.45 + 0.15,
-        opacity: Math.random() * 0.6 + 0.2
-      });
-    }
-
-    function drawAmbient() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const isPrincess = currentTheme === 'princess';
-      ctx.fillStyle = isPrincess ? 'rgba(255, 119, 188, 0.55)' : 'rgba(0, 240, 255, 0.45)';
-
-      particles.forEach((p) => {
-        p.y -= p.speedY;
-        if (p.y < -10) {
-          p.y = canvas.height + 10;
-          p.x = Math.random() * canvas.width;
-        }
-
-        ctx.globalAlpha = p.opacity;
-        if (isPrincess) {
-          // Diamond sparkle shape
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y - p.size * 1.4);
-          ctx.lineTo(p.x + p.size, p.y);
-          ctx.lineTo(p.x, p.y + p.size * 1.4);
-          ctx.lineTo(p.x - p.size, p.y);
-          ctx.closePath();
-          ctx.fill();
-        } else {
-          // Digital terminal square pixel
-          ctx.fillRect(p.x, p.y, p.size * 1.3, p.size * 1.3);
-        }
-      });
-
-      requestAnimationFrame(drawAmbient);
-    }
-    drawAmbient();
-
-    // Subtle cursor trail
-    let lastTrail = 0;
-    window.addEventListener('mousemove', (e) => {
-      const now = Date.now();
-      if (now - lastTrail < 45) return;
-      lastTrail = now;
-
-      const dot = document.createElement('span');
-      dot.className = 'cursor-dot';
-      dot.style.left = e.clientX + 'px';
-      dot.style.top = e.clientY + 'px';
-
-      if (currentTheme === 'princess') {
-        dot.textContent = '✦';
-        dot.style.color = '#ff5ca8';
-        dot.style.fontSize = '12px';
-      } else {
-        dot.textContent = '+';
-        dot.style.color = '#00f0ff';
-        dot.style.fontFamily = 'monospace';
-        dot.style.fontSize = '13px';
-      }
-
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 650);
-    });
-  </script>
-</body>
-</html>
